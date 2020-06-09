@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "393659398380",
+    "firebase_url": "https://calendar-app-eb2ab.firebaseio.com",
+    "project_id": "calendar-app-eb2ab",
+    "storage_bucket": "calendar-app-eb2ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393659398380:android:965852f37a74c0c2a7cdc9",
+        "android_client_info": {
+          "package_name": "com.example.calendarfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393659398380-sc84ct15131ucal68ot4v1n762elguf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4i70zR-L8iqKpU6Pb21IcIt7-xP63Muw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393659398380-sc84ct15131ucal68ot4v1n762elguf4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
