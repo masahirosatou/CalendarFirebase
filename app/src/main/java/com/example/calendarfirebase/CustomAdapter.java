@@ -56,7 +56,7 @@ public class CustomAdapter extends ArrayAdapter<CalendarData> {
 
     public CalendarData getCalendarDateKey(String key) {
         for (CalendarData calendarData : mCards) {
-            if (CalendarData.getFirebaseKey().equals(key)) {
+            if (calendarData.getFirebaseKey().equals(key)) {
                 return calendarData;
             }
         }
