@@ -1,8 +1,9 @@
 package com.example.calendarfirebase;
 
 public class CalendarData {
-    public String title;
-    public String firebaseKey;
+    private String title;
+    private String firebaseKey;
+    private String imageUrl;
 
     public CalendarData(String key,String title) {
         this.firebaseKey = key;

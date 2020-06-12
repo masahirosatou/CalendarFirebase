@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/add_ImageView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="104dp"
@@ -72,5 +72,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="クリックして画像を追加"
+        app:layout_constraintBottom_toBottomOf="@+id/add_ImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_ImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
