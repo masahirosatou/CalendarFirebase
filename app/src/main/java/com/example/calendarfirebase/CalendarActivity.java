@@ -48,7 +48,6 @@ public class CalendarActivity extends AppCompatActivity implements ListView.OnIt
 
         //データベース取得
         database = FirebaseDatabase.getInstance();
-        //TODO referenceは参照という意味
         reference = database.getReference("users").child(uid);
         //変数リストにリストビューを入れる
         mListView = (ListView) findViewById(R.id.list_view);

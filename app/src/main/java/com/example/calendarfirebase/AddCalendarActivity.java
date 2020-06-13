@@ -5,22 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.BufferedInputStream;
 
 public class AddCalendarActivity extends AppCompatActivity {
     private static final String TAG = "Add";
@@ -29,6 +36,8 @@ public class AddCalendarActivity extends AppCompatActivity {
     private DatabaseReference reference = database.getReference();
     private EditText titleEditText;
     private ImageView mAddMessageImageView;
+    private TextView imageText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +67,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         String uid = user.getUid();
 
 //    引数のToDoDataの内容をデータベースに送る。
-        CalendarData calendarData = new CalendarData(key, title);
+        CalendarData calendarData = new CalendarData(key, title,null);
 
         reference.child("users").child(uid).child(key).setValue(calendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -67,6 +76,24 @@ public class AddCalendarActivity extends AppCompatActivity {
             }
         });
     }
+    // startActivityForResultを受け取る mAddMessageImageViewに表示
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
+            try {
+                imageText = (TextView)findViewById(R.id.ImageText);
+                imageText.setText("");
+
+                BufferedInputStream inputStream = new BufferedInputStream(getContentResolver().openInputStream(data.getData()));
+                Bitmap image = BitmapFactory.decodeStream(inputStream);
+                mAddMessageImageView.setImageBitmap(image);
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
     //    画像をアップロードしてメッセージを更新　ユーザごとに分けることが必要uidを気にするべき
 
 }

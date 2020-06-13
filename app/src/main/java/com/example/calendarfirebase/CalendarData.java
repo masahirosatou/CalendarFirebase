@@ -3,11 +3,13 @@ package com.example.calendarfirebase;
 public class CalendarData {
     private String title;
     private String firebaseKey;
+//    TODO uid imageUrlをうまいこと合わせる　違いはユーザーごとにできるかできないか
     private String imageUrl;
 
-    public CalendarData(String key,String title) {
+    public CalendarData(String key,String title, String imageUrl) {
         this.firebaseKey = key;
         this.title = title;
+        this.imageUrl = imageUrl;
     }
 
     public CalendarData() {
@@ -29,4 +31,11 @@ public class CalendarData {
         return title;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
