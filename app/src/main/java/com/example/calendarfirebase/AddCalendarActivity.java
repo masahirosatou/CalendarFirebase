@@ -82,12 +82,23 @@ public class AddCalendarActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             try {
+                final Uri uri = data.getData();
+                Log.d(TAG, "Uri: " + uri.toString());
                 imageText = (TextView)findViewById(R.id.ImageText);
                 imageText.setText("");
 
                 BufferedInputStream inputStream = new BufferedInputStream(getContentResolver().openInputStream(data.getData()));
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
                 mAddMessageImageView.setImageBitmap(image);
+                //Fire Storage に追加する処理いる。 Saveでその処理をしたいが、ひとまずResult後に
+
+                StorageReference storageReference =
+                        FirebaseStorage.getInstance()
+                        //保存場所のパスを設定している。だから参照必ず作成するのか
+                                .getReference(uri.getLastPathSegment();
+//                //画像をアップロードするメソッド呼び出し
+                putImageInStorage(storageReference, uri);
+
             } catch (Exception e) {
 
             }
@@ -95,5 +106,24 @@ public class AddCalendarActivity extends AppCompatActivity {
     }
 
     //    画像をアップロードしてメッセージを更新　ユーザごとに分けることが必要uidを気にするべき
-
+    private void putImageInStorage(StorageReference storageReference, Uri uri) {
+        storageReference.putFile(uri).addOnCompleteListener(AddCalendarActivity.this,
+                new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            task.getResult().getMetadata().getReference().getDownloadUrl()
+                                    .addOnCompleteListener(AddCalendarActivity.this,
+                                            new OnCompleteListener<Uri>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Uri> task) {
+                                                }
+                                            });
+                        } else {
+                            Log.w(TAG, "Image upload task was not successful.",
+                                    task.getException());
+                        }
+                    }
+                });
+    }
 }
