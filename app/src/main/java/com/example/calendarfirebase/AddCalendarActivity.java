@@ -38,7 +38,11 @@ public class AddCalendarActivity extends AppCompatActivity {
     private ImageView mAddMessageImageView;
     private TextView imageText;
     private Uri uri;
-    StorageReference storageReference;
+    private StorageReference storageReference;
+    private String title;
+    private String key ;
+    private FirebaseUser user;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +66,11 @@ public class AddCalendarActivity extends AppCompatActivity {
 
     }
     public void save(View v) {
-        String title = titleEditText.getText().toString();
-        String key = reference.push().getKey();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
+         title = titleEditText.getText().toString();
+        key = reference.push().getKey();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+         uid = user.getUid();
+//                //画像をアップロードするメソッド呼び出し
         putImageInStorage(storageReference, uri);
 
 //    引数のToDoDataの内容をデータベースに送る。
@@ -99,7 +103,7 @@ public class AddCalendarActivity extends AppCompatActivity {
                         FirebaseStorage.getInstance()
                         //保存場所のパスを設定している。だから参照必ず作成するのか
                                 .getReference(uri.getLastPathSegment());
-//                //画像をアップロードするメソッド呼び出し
+
 
             } catch (Exception e) {
 
