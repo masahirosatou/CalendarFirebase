@@ -37,12 +37,7 @@ public class AddCalendarActivity extends AppCompatActivity {
     private EditText titleEditText;
     private ImageView mAddMessageImageView;
     private TextView imageText;
-    private Uri uri;
-    private StorageReference storageReference;
-    private String title;
-    private String key ;
-    private FirebaseUser user;
-    private String uid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +51,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         mAddMessageImageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
                 startActivityForResult(intent,REQUEST_IMAGE);
@@ -66,12 +61,10 @@ public class AddCalendarActivity extends AppCompatActivity {
 
     }
     public void save(View v) {
-         title = titleEditText.getText().toString();
-        key = reference.push().getKey();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-         uid = user.getUid();
-//                //画像をアップロードするメソッド呼び出し
-        putImageInStorage(storageReference, uri);
+        String title = titleEditText.getText().toString();
+        String key = reference.push().getKey();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
 
 //    引数のToDoDataの内容をデータベースに送る。
         CalendarData calendarData = new CalendarData(key, title,null);
@@ -89,7 +82,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             try {
-                uri = data.getData();
+                final Uri uri = data.getData();
                 Log.d(TAG, "Uri: " + uri.toString());
                 imageText = (TextView)findViewById(R.id.ImageText);
                 imageText.setText("");
@@ -99,11 +92,12 @@ public class AddCalendarActivity extends AppCompatActivity {
                 mAddMessageImageView.setImageBitmap(image);
                 //Fire Storage に追加する処理いる。 Saveでその処理をしたいが、ひとまずResult後に
 
-                 storageReference =
+                StorageReference storageReference =
                         FirebaseStorage.getInstance()
                         //保存場所のパスを設定している。だから参照必ず作成するのか
-                                .getReference(uri.getLastPathSegment());
-
+                                .getReference(uri.getLastPathSegment();
+//                //画像をアップロードするメソッド呼び出し
+                putImageInStorage(storageReference, uri);
 
             } catch (Exception e) {
 
