@@ -28,6 +28,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.BufferedInputStream;
+import java.lang.ref.Reference;
 
 public class AddCalendarActivity extends AppCompatActivity {
     private static final String TAG = "Add";
@@ -37,6 +38,12 @@ public class AddCalendarActivity extends AppCompatActivity {
     private EditText titleEditText;
     private ImageView mAddMessageImageView;
     private TextView imageText;
+
+    // Firebase instance variables
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mFirebaseAuth.getCurrentUser();
+    String uid = user.getUid();
+    CalendarData mCalendarData;
 
 
     @Override
@@ -59,12 +66,16 @@ public class AddCalendarActivity extends AppCompatActivity {
         });
 
 
+
+    }
+    public void back(View v){
+        finish();
     }
     public void save(View v) {
         String title = titleEditText.getText().toString();
         String key = reference.push().getKey();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+
+
 
 //    引数のToDoDataの内容をデータベースに送る。
         CalendarData calendarData = new CalendarData(key, title,null);
@@ -91,11 +102,11 @@ public class AddCalendarActivity extends AppCompatActivity {
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
                 mAddMessageImageView.setImageBitmap(image);
                 //Fire Storage に追加する処理いる。 Saveでその処理をしたいが、ひとまずResult後に
-
                 StorageReference storageReference =
                         FirebaseStorage.getInstance()
                         //保存場所のパスを設定している。だから参照必ず作成するのか
-                                .getReference(uri.getLastPathSegment();
+                                .getReference(uid)
+                                .child(uri.getLastPathSegment());
 //                //画像をアップロードするメソッド呼び出し
                 putImageInStorage(storageReference, uri);
 
