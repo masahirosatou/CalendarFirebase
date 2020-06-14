@@ -38,13 +38,15 @@ public class AddCalendarActivity extends AppCompatActivity {
     private EditText titleEditText;
     private ImageView mAddMessageImageView;
     private TextView imageText;
-
+    private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
+    private String title;
     // Firebase instance variables
 //    CalendarDataにuid,keyなどしっかり入れないと起動しない。　重複したせいでならなかった！！
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mFirebaseAuth.getCurrentUser();
     String uid = user.getUid();
     String key = reference.push().getKey();
+    CalendarData mCalendarData;
 
 
     @Override
@@ -53,6 +55,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_calendar);
 
         titleEditText = (EditText) findViewById(R.id.title);
+
         //イメージ表示
         mAddMessageImageView = (ImageView) findViewById(R.id.add_ImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener(){
@@ -72,13 +75,10 @@ public class AddCalendarActivity extends AppCompatActivity {
         finish();
     }
     public void save(View v) {
-        String title = titleEditText.getText().toString();
+        title = titleEditText.getText().toString();
 
-
-
-
-//    引数のToDoDataの内容をデータベースに送る。
-        CalendarData calendarData = new CalendarData(key, title,null);
+//引数のToDoDataの内容をデータベースに送る。 imageURI書き込み完了　LOADING_IMAGE_URLを写真ごとのデータにしないといけない
+        CalendarData calendarData = new CalendarData(key, title,LOADING_IMAGE_URL);
 
         reference.child("users").child(uid).child(key).setValue(calendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -101,6 +101,13 @@ public class AddCalendarActivity extends AppCompatActivity {
                 BufferedInputStream inputStream = new BufferedInputStream(getContentResolver().openInputStream(data.getData()));
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
                 mAddMessageImageView.setImageBitmap(image);
+
+                //DBにimageUrlを書き込む
+                mCalendarData = new CalendarData(key,title,LOADING_IMAGE_URL);
+                reference.child("users").child(uid).push().setValue(mCalendarData);
+
+
+
                 //Fire Storage に追加する処理いる。 Saveでその処理をしたいが、ひとまずResult後に
                 StorageReference storageReference =
                         FirebaseStorage.getInstance()
