@@ -47,6 +47,8 @@ public class AddCalendarActivity extends AppCompatActivity {
     String uid = user.getUid();
     String key = reference.push().getKey();
     CalendarData mCalendarData;
+    Uri uri;
+    StorageReference storageReference;
 
 
     @Override
@@ -78,14 +80,17 @@ public class AddCalendarActivity extends AppCompatActivity {
         title = titleEditText.getText().toString();
 
 //引数のToDoDataの内容をデータベースに送る。 imageURI書き込み完了　LOADING_IMAGE_URLを写真ごとのデータにしないといけない
-        CalendarData calendarData = new CalendarData(key, title,LOADING_IMAGE_URL);
+         mCalendarData = new CalendarData(key, title,LOADING_IMAGE_URL);
 
-        reference.child("users").child(uid).child(key).setValue(calendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
+        putImageInStorage(storageReference, uri,key);
+        reference.child("users").child(uid).child(key).setValue(mCalendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void v) {
+
                 finish();
             }
         });
+
     }
     // startActivityForResultを受け取る mAddMessageImageViewに表示
     @Override
@@ -93,7 +98,7 @@ public class AddCalendarActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             try {
-                final Uri uri = data.getData();
+                 uri = data.getData();
                 Log.d(TAG, "Uri: " + uri.toString());
                 imageText = (TextView)findViewById(R.id.ImageText);
                 imageText.setText("");
@@ -103,20 +108,20 @@ public class AddCalendarActivity extends AppCompatActivity {
                 mAddMessageImageView.setImageBitmap(image);
 
                 //DBにimageUrlを書き込む
-                mCalendarData = new CalendarData(key,title,LOADING_IMAGE_URL);
-                reference.child("users").child(uid).push().setValue(mCalendarData);
+//                mCalendarData = new CalendarData(key,title,LOADING_IMAGE_URL);
+//                reference.child("users").child(uid).push().setValue(mCalendarData);
 
 
 
                 //Fire Storage に追加する処理いる。 Saveでその処理をしたいが、ひとまずResult後に
-                StorageReference storageReference =
+                storageReference =
                         FirebaseStorage.getInstance()
                         //保存場所のパスを設定している。だから参照必ず作成するのか
                                 .getReference(uid)
                                 .child(key)
                                 .child(uri.getLastPathSegment());
 //                //画像をアップロードするメソッド呼び出し
-                putImageInStorage(storageReference, uri);
+
 
             } catch (Exception e) {
 
@@ -125,7 +130,7 @@ public class AddCalendarActivity extends AppCompatActivity {
     }
 
     //    画像をアップロードしてメッセージを更新　ユーザごとに分けることが必要uidを気にするべき
-    private void putImageInStorage(StorageReference storageReference, Uri uri) {
+    private void putImageInStorage(StorageReference storageReference, Uri uri,final String key) {
         storageReference.putFile(uri).addOnCompleteListener(AddCalendarActivity.this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -136,6 +141,13 @@ public class AddCalendarActivity extends AppCompatActivity {
                                             new OnCompleteListener<Uri>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Uri> task) {
+                                                    if (task.isSuccessful()) {
+                                                         mCalendarData =
+                                                                new CalendarData(key, title,
+                                                                        task.getResult().toString());
+                                                        reference.child("users").child(uid).child(key)
+                                                                .setValue(mCalendarData);
+                                                    }
                                                 }
                                             });
                         } else {
