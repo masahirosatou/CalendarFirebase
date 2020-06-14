@@ -40,11 +40,12 @@ public class AddCalendarActivity extends AppCompatActivity {
     private TextView imageText;
 
     // Firebase instance variables
+//    CalendarDataにuid,keyなどしっかり入れないと起動しない。　重複したせいでならなかった！！
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mFirebaseAuth.getCurrentUser();
     String uid = user.getUid();
-    CalendarData mCalendarData;
     String key = reference.push().getKey();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class AddCalendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_calendar);
 
         titleEditText = (EditText) findViewById(R.id.title);
-
         //イメージ表示
         mAddMessageImageView = (ImageView) findViewById(R.id.add_ImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener(){
