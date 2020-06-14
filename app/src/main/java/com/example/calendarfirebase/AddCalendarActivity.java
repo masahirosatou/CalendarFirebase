@@ -44,7 +44,7 @@ public class AddCalendarActivity extends AppCompatActivity {
     FirebaseUser user = mFirebaseAuth.getCurrentUser();
     String uid = user.getUid();
     CalendarData mCalendarData;
-
+    String key = reference.push().getKey();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class AddCalendarActivity extends AppCompatActivity {
     }
     public void save(View v) {
         String title = titleEditText.getText().toString();
-        String key = reference.push().getKey();
+
 
 
 
@@ -106,6 +106,7 @@ public class AddCalendarActivity extends AppCompatActivity {
                         FirebaseStorage.getInstance()
                         //保存場所のパスを設定している。だから参照必ず作成するのか
                                 .getReference(uid)
+                                .child(key)
                                 .child(uri.getLastPathSegment());
 //                //画像をアップロードするメソッド呼び出し
                 putImageInStorage(storageReference, uri);
