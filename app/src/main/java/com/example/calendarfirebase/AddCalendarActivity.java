@@ -78,18 +78,7 @@ public class AddCalendarActivity extends AppCompatActivity {
     }
     public void save(View v) {
         title = titleEditText.getText().toString();
-
-//引数のToDoDataの内容をデータベースに送る。 imageURI書き込み完了　LOADING_IMAGE_URLを写真ごとのデータにしないといけない
-         mCalendarData = new CalendarData(key, title,LOADING_IMAGE_URL);
-
         putImageInStorage(storageReference, uri,key);
-        reference.child("users").child(uid).child(key).setValue(mCalendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void v) {
-
-                finish();
-            }
-        });
 
     }
     // startActivityForResultを受け取る mAddMessageImageViewに表示
@@ -146,7 +135,14 @@ public class AddCalendarActivity extends AppCompatActivity {
                                                                 new CalendarData(key, title,
                                                                         task.getResult().toString());
                                                         reference.child("users").child(uid).child(key)
-                                                                .setValue(mCalendarData);
+                                                                .setValue(mCalendarData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void v) {
+
+                                                                finish();
+                                                            }
+                                                        });
+
                                                     }
                                                 }
                                             });
