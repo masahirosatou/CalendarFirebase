@@ -7,8 +7,8 @@
 あたりまえの日常があたりまえではなく、みんなの支えがあってできているということを実感できるようなアプリ作りたいという思いを乗せたAndroidのポートフォリオです。
 
 # DEMO
-AdobeXD
-UIイメージ
+AdobeXD\n
+UIイメージ\n
 https://xd.adobe.com/view/22cd9fcf-c1b3-4b3b-7b38-da381c13d8c0-54fc/
 "hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
 
@@ -39,18 +39,18 @@ pip install huga_package
 ```bash
 git clone https://github.com/masahirosatou/CalendarFirebase.git
 ```
-Android Studioのイントール、Firebaseの登録などが必要になります。
-Android　Studio↓
-https://developer.android.com/studio/install?hl=ja
-Firebase↓
-https://firebase.google.com/docs/android/setup?hl=ja
+* Android Studioのイントール、Firebaseの登録などが必要になります。
+* Android　Studio↓
+* https://developer.android.com/studio/install?hl=ja
+* Firebase↓
+* https://firebase.google.com/docs/android/setup?hl=ja
 # Note
 
 どんどんアップデートしていきます。
 
 # Next
 * 写真のリスト表示
-*
+
 
 # Author
 
