@@ -9,7 +9,9 @@
 # DEMO
 AdobeXD  
 UIイメージ  
-https://xd.adobe.com/view/22cd9fcf-c1b3-4b3b-7b38-da381c13d8c0-54fc/  
+https://firebasestorage.googleapis.com/v0/b/calendar-app-eb2ab.appspot.com/o/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%2FScreenshot_1592268308.png?alt=media&token=455a23b5-51f9-499d-b292-e1bc59526008
+
+https://xd.adobe.com/view/22cd9fcf-c1b3-4b3b-7b38-da381c13d8c0-54fc/screen/6342b3cd-fcff-42eb-88b3-30deaacc5768/Calendar
 "hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる  
 
 # Features
@@ -40,10 +42,10 @@ pip install huga_package
 git clone https://github.com/masahirosatou/CalendarFirebase.git
 ```
 * Android Studioのイントール、Firebaseの登録などが必要になります。
-* Android　Studio↓
-* https://developer.android.com/studio/install?hl=ja
+* Android　Studio↓  
+https://developer.android.com/studio/install?hl=ja  
 * Firebase↓
-* https://firebase.google.com/docs/android/setup?hl=ja
+https://firebase.google.com/docs/android/setup?hl=ja  
 # Note
 
 どんどんアップデートしていきます。
