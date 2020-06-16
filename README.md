@@ -7,10 +7,10 @@
 あたりまえの日常があたりまえではなく、みんなの支えがあってできているということを実感できるようなアプリ作りたいという思いを乗せたAndroidのポートフォリオです。
 
 # DEMO
-AdobeXD\n
-UIイメージ\n
-https://xd.adobe.com/view/22cd9fcf-c1b3-4b3b-7b38-da381c13d8c0-54fc/
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
+AdobeXD  
+UIイメージ  
+https://xd.adobe.com/view/22cd9fcf-c1b3-4b3b-7b38-da381c13d8c0-54fc/  
+"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる  
 
 # Features
 
