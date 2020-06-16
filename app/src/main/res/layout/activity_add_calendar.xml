@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:hint="ここに入力"
+            android:hint="ここに数字を入力"
             android:singleLine="true"
             android:textSize="28sp"
             tools:layout_editor_absoluteX="-2dp"

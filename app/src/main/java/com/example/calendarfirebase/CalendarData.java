@@ -8,7 +8,7 @@ public class CalendarData {
 
     public CalendarData(String key,String title, String imageUrl) {
         this.firebaseKey = key;
-        this.title = title;
+        this.title = title +"歳";
         this.imageUrl = imageUrl;
     }
 
