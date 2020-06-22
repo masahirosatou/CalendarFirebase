@@ -1,4 +1,4 @@
-package com.example.calendarfirebase;
+package com.masahiro.calendarfirebase;
 
 public class CalendarData {
     private String title;

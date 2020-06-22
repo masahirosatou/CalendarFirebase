@@ -1,4 +1,4 @@
-package com.example.calendarfirebase;
+package com.masahiro.calendarfirebase;
 
 import android.content.Context;
 import android.net.Uri;

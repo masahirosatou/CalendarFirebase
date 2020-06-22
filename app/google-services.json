@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:393659398380:android:965852f37a74c0c2a7cdc9",
         "android_client_info": {
-          "package_name": "com.example.calendarfirebase"
+          "package_name": "com.masahiro.calendarfirebase"
         }
       },
       "oauth_client": [

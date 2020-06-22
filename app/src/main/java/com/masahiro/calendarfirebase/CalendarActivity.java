@@ -1,4 +1,4 @@
-package com.example.calendarfirebase;
+package com.masahiro.calendarfirebase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
